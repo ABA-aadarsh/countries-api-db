@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import style from "./CountryPreview.module.css"
 import { Link } from 'react-router-dom'
+import Skeleton from 'react-loading-skeleton'
 
 function CountryPreview({code}) {
     const [data,setData]=useState({})
@@ -30,24 +31,44 @@ function CountryPreview({code}) {
     useEffect(()=>{
         getFlagAndName(code)
     },[])
-  return !loading && (
-    <div className={style.container}>
-        <Link 
-            to={`/country/${code}`}
-        >
-            <div
-                className={style.imgContainer}
+    if(loading){
+        return (
+          <div className={style.container}>
+              <div
+                  className={style.imgContainer}
+              >
+                  <Skeleton 
+                      width={300}
+                      height={300}/>
+              </div>
+              <h3
+                  className={style.name}
+              >
+                  <Skeleton/>
+              </h3>
+          </div>
+        )
+    }else{
+        return (
+        <div className={style.container}>
+            <Link 
+                to={`/country/${code}`}
             >
-                <img src={data.flag} alt="" 
-                    className={style.img}
-                />
-            </div>
-            <h3
-                className={style.name}
-            >{data.name}</h3>
-        </Link>
-    </div>
-  )
+                <div
+                    className={style.imgContainer}
+                >
+                    <img src={data.flag} alt="" 
+                        className={style.img}
+                    />
+                </div>
+                <h3
+                    className={style.name}
+                >{data.name}</h3>
+            </Link>
+        </div>
+        )
+    }
+
 }
 
 export default CountryPreview
