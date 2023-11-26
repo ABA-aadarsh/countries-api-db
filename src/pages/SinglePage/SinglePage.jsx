@@ -32,7 +32,7 @@ function SinglePage() {
                         currency: Object.values(data.currencies)[0],
                         continents: data.continents,
                         area: data.area,
-                        borderCountries: data.borders,
+                        borderCountries: data.borders || [],
                         flag: data.flags.svg,
                         flagInfo: data.flags.alt
                     }

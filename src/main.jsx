@@ -4,6 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import SinglePage from './pages/SinglePage/SinglePage.jsx'
+import Home from './pages/Home/Home.jsx'
 
 const router=createBrowserRouter(
   createRoutesFromElements(
@@ -12,6 +13,10 @@ const router=createBrowserRouter(
         path='country/:code' element={
           <SinglePage/>
         }
+      />
+      <Route
+        path=''
+        element={<Home/>}
       />
     </Route>
   )
