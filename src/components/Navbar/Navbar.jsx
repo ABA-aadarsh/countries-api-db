@@ -19,7 +19,9 @@ function Navbar() {
             </Link>
         </h3>
         <div className={style.searchBoxContainer}>
-        <Searchbar/>
+        <Searchbar
+            width={200}
+        />
         </div>
     </nav>
   )

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import style from "./Searchbar.module.css"
 import { useNavigate } from 'react-router-dom'
 
-function Searchbar() {
+function Searchbar({width=400,storeData=()=>{},listShow=true}) {
     const [result,setResult]=useState([])
     const navigate=useNavigate()
     const [inputValue,setInputValue]=useState("")
@@ -14,9 +14,11 @@ function Searchbar() {
         if(res.status==200){
             const data=await res.json()
             setResult([...data])
+            storeData([...data])
             setShowResults(true)
         }else{
             setResult([])
+            storeData([])
         }
     }
     useEffect(()=>{
@@ -39,6 +41,7 @@ function Searchbar() {
     },[inputValue])
   return (
     <div className={style.searchBarContainer}
+        style={{width:`${width}px`}}
         ref={ref}
     >
         <div className={style.searchbar}>
@@ -52,7 +55,7 @@ function Searchbar() {
         </div>
         <div className={style.box}
             style={{
-                display:showResults?"unset":"none"
+                display:(showResults && listShow)?"unset":"none"
             }}
         >
             <div className={style.resultsContainer}
